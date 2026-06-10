@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.0 (2026-06-11)
+- Change the default tiktoken encoding for `--token-count` and `count_tokens()` from `cl100k_base` to `o200k_base`, matching current OpenAI models (GPT-4o and the GPT-5 series). Counts shift slightly (~0.5%) compared to previous versions. Pass `encoding_name="cl100k_base"` to `count_tokens()` for the old behavior.
+- Fix `--token-count` crashing when the paper text contains literal special-token strings such as `<|endofprompt|>` (e.g., the GPT-4 report, 2303.08774). These are now counted as plain text.
+- Update README token-count examples to reproducible values.
+
 ## 0.13.3 (2026-04-29)
 - Fix extraction failing for arXiv papers served as a plain `.gz` file (single `.tex` file) instead of a `.tar.gz` archive. [#39](https://github.com/takashiishida/arxiv-to-prompt/issues/39) (reported by @chaisepoilue)
 

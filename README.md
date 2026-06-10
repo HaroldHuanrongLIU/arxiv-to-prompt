@@ -85,11 +85,11 @@ arxiv-to-prompt 2303.08774 --expand-macros
 
 # Print token count (requires pip install 'arxiv-to-prompt[tokens]')
 arxiv-to-prompt 2303.08774 --token-count
-# 94253
+# 33332
 
 # Combine with other flags to see how they affect token count
 arxiv-to-prompt 2303.08774 --no-comments --no-appendix --token-count
-# 62451
+# 18370
 
 # Combine with the `llm` library from https://github.com/simonw/llm to chat about the paper
 arxiv-to-prompt 1706.03762 | llm -s "explain this paper"

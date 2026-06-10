@@ -1143,12 +1143,12 @@ def check_source_available(arxiv_id: str) -> bool:
         session.close()
 
 
-def count_tokens(text: str, encoding_name: str = "cl100k_base") -> int:
+def count_tokens(text: str, encoding_name: str = "o200k_base") -> int:
     """Count the number of tokens in text using tiktoken.
 
     Args:
         text: The text to tokenize.
-        encoding_name: The tiktoken encoding to use (default: cl100k_base).
+        encoding_name: The tiktoken encoding to use (default: o200k_base).
 
     Returns:
         The token count.
@@ -1164,4 +1164,6 @@ def count_tokens(text: str, encoding_name: str = "cl100k_base") -> int:
             "Install it with: pip install 'arxiv-to-prompt[tokens]'"
         )
     enc = tiktoken.get_encoding(encoding_name)
-    return len(enc.encode(text))
+    # Papers can contain literal special-token strings like '<|endofprompt|>'
+    # (e.g. the GPT-4 report); count them as plain text instead of raising.
+    return len(enc.encode(text, disallowed_special=()))
